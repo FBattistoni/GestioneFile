@@ -11,7 +11,7 @@ import java.util.logging.Logger;
  * @author MC
  * @version 12/01/23
  */
-
+//prova
 public class Scrittore implements Runnable{
 
     String nomeFile;
