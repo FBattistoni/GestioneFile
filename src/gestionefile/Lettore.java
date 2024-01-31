@@ -5,12 +5,13 @@ import java.io.IOException;
 
 /**
  *
- * @author MC
- * @ 12/01/23
+ * @author francescobattistoni
+ * @version 31/01/23
  */
-
+ 
 public class Lettore extends Thread{
     String nomeFile;
+    
     
     public Lettore(String nomeFile){
         this.nomeFile = nomeFile;
@@ -19,27 +20,28 @@ public class Lettore extends Thread{
     /**
      * Legge il file senza tener conto del tipo di file
      * e lo mostra in output
+     * @return 
      */
-    public void leggi(){
-        FileReader fr;
+    public String leggi(){
+        StringBuilder sb= new StringBuilder();
         int i; 
-        try { 
-            //1) apro il file
-            fr = new FileReader(nomeFile);
+         //1) apro il file
+        try( FileReader  fr = new FileReader(nomeFile)) { 
             //2) leggo carattere per carattere e lo stampo 
             while ((i=fr.read()) != -1)
-                System.out.print((char) i);
-            
+               sb.append((char) i);
             System.out.print("\n\r");
             //3) chiudo il file
             fr.close();
         } catch (IOException ex) {
             System.err.println("Errore in lettura!");
         }
+        return sb.toString();
     }
     
 
+    @Override
     public void run(){
-        leggi();
+        System.out.println(leggi());
     }
 }
